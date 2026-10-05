@@ -1,0 +1,399 @@
+/* ===================================================================
+   ANIMAZIONI E CONFIGURAZIONE GENERALE
+   =================================================================== */
+
+@keyframes digitazione {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes cursoreLampi {
+  0%, 50% { border-color: #1F4C34; }
+  50.1%, 100% { border-color: transparent; }
+}
+
+@keyframes apparizioneFluida {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fluttuazioneLenta {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* ===================================================================
+   ELEMENTI NATURALI DECORATIVI AI LATI
+   =================================================================== */
+
+.decorazione-lato {
+  position: fixed;
+  top: 25%;
+  width: 70px;
+  height: 250px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.7;
+  animation: soffioNaturale 6s ease-in-out infinite alternate;
+}
+
+.decorazione-lato.sinistro { left: 20px; }
+.decorazione-lato.destro { right: 20px; transform: scaleX(-1); }
+
+@keyframes soffioNaturale {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@media (max-width: 1024px) {
+  .decorazione-lato { display: none; }
+}
+
+/* Contenuto principale pulito e centrato */
+.contenuto-principale {
+  position: relative;
+  padding-top: 130px;
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+}
+
+/* ===================================================================
+   SEZIONE BENVENUTO: TITOLO E CARD LATERALI CON EFFETTO LUCE E ZOOM
+   =================================================================== */
+
+.sezione-benvenuto-professionale {
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* Titolo con effetto macchina da scrivere impeccabile */
+.titolo-sezione-scrittura {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(30px, 4.2vw, 42px);
+  color: #1F4C34;
+  margin: 0 auto 35px auto;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #1F4C34;
+  width: 0;
+  animation: 
+    digitazione 2.2s steps(30, end) forwards, 
+    cursoreLampi 0.5s step-end 1.4s forwards;
+  max-width: fit-content;
+}
+
+/* Griglia simmetrica per riempire i lati verticalmente */
+.grid-benvenuto-lati {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card-benvenuto-lato {
+  background: rgba(255, 252, 247, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(229, 197, 133, 0.4);
+  border-radius: 22px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(31, 76, 52, 0.06);
+  text-align: left;
+  position: relative;
+  opacity: 0;
+  overflow: hidden; /* Necessario per contenere il riflesso di luce in movimento */
+  cursor: pointer; /* Il mouse diventa il dito */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s ease, 
+              border-color 0.4s ease, 
+              background 0.4s ease;
+}
+
+/* Effetto di luce scorrevole (Riflesso che passa sopra la card) */
+.card-benvenuto-lato::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 45%,
+    rgba(229, 197, 133, 0.25) 50%,
+    transparent 55%
+  );
+  transform: rotate(25deg) translateX(-100%);
+  transition: transform 0.7s ease-in-out;
+  pointer-events: none;
+}
+
+/* Azione spettacolare al passaggio del mouse */
+.card-benvenuto-lato:hover {
+  transform: translateY(-8px) scale(1.03);
+  background: rgba(255, 255, 255, 0.98);
+  border-color: #E5C585;
+  box-shadow: 0 0 35px rgba(229, 197, 133, 0.7), 
+              0 20px 45px rgba(31, 76, 52, 0.18);
+}
+
+.card-benvenuto-lato:hover::after {
+  transform: rotate(25deg) translateX(100%);
+}
+
+.card-benvenuto-lato p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 15.5px;
+  color: #1F4C34;
+  line-height: 1.7;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.card-benvenuto-lato strong {
+  color: #1F4C34;
+  font-weight: 700;
+}
+
+/* Animazioni iniziali di comparsa e scivolamento dai lati */
+.card-sinistra {
+  animation: entraDaSinistra 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.6s;
+}
+
+.card-destra {
+  animation: entraDaDestra 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 2.0s;
+}
+
+@keyframes entraDaSinistra {
+  0% { opacity: 0; transform: translateX(-35px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes entraDaDestra {
+  0% { opacity: 0; transform: translateX(35px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* ===================================================================
+   BOX DOMANDE PRINCIPALE (Verde Ufficiale e Oro)
+   =================================================================== */
+
+.box-fai-domanda {
+  background: #1F4C34;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(229, 197, 133, 0.5);
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 15px 35px rgba(31, 76, 52, 0.25);
+  color: #FFF;
+  opacity: 0;
+  animation: apparizioneFluida 1s ease forwards;
+  animation-delay: 2.4s;
+  position: relative;
+}
+
+.box-fai-domanda::before {
+  content: '✦';
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  color: #E5C585;
+  font-size: 20px;
+  opacity: 0.4;
+}
+
+.box-fai-domanda h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  color: #E5C585;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.testo-avviso-login {
+  font-size: 15px;
+  opacity: 0.9;
+  margin: 0;
+  font-style: italic;
+  color: #F9E79F;
+}
+
+.form-faq {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.form-faq textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(229, 197, 133, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  color: #FFF;
+  resize: vertical;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-faq textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-faq textarea:focus {
+  border-color: #E5C585;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(229, 197, 133, 0.2);
+}
+
+.btn-invia-domanda {
+  background: #E5C585;
+  color: #1F4C34;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 14.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.btn-invia-domanda:hover {
+  background: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.container-miei-messaggi {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.container-miei-messaggi h4 {
+  font-family: 'Fraunces', serif;
+  color: #E5C585;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+#barraFiltriOrdinamento {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  color: #FFF;
+}
+
+#selectOrdine {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFF;
+  border: 1px solid rgba(229, 197, 133, 0.3);
+  outline: none;
+  font-family: 'Manrope', sans-serif;
+}
+
+#selectOrdine option {
+  color: #000;
+}
+
+/* ===================================================================
+   FAQ RAPIDE IN BASSO
+   =================================================================== */
+
+.sezione-faq-rapide {
+  background: rgba(255, 252, 247, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(229, 197, 133, 0.4);
+  border-radius: 20px;
+  padding: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(31, 76, 52, 0.05);
+  opacity: 0;
+  animation: apparizioneFluida 1s ease forwards;
+  animation-delay: 3.1s;
+}
+
+.titolo-faq-rapide {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  color: #1F4C34;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.griglia-faq {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(46, 107, 73, 0.15);
+  border-radius: 12px;
+  padding: 15px 20px;
+  transition: all 0.3s ease;
+}
+
+.faq-item[open] {
+  background: #FFFFFF;
+  border-color: #E5C585;
+  box-shadow: 0 5px 15px rgba(31, 76, 52, 0.08);
+}
+
+.faq-item summary {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #1F4C34;
+  cursor: pointer;
+  outline: none;
+}
+
+.faq-item p {
+  font-size: 14.5px;
+  color: #2C3E50;
+  margin-top: 10px;
+  margin-bottom: 0;
+  line-height: 1.5;
+  animation: apparizioneFluida 0.4s ease forwards;
+}
+
+/* ===================================================================
+   RESPONSIVE PER DISPOSITIVI MOBILI
+   =================================================================== */
+
+@media (max-width: 768px) {
+  .grid-benvenuto-lati {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .card-sinistra, .card-destra {
+    animation: apparizioneFluida 1s ease forwards;
+  }
+}

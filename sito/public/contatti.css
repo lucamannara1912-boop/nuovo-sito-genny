@@ -1,0 +1,299 @@
+/* ===================================================================
+   CONTATTI.CSS — CORNICE LUMINOSA COLORATA E HOVER NETTO
+   =================================================================== */
+
+.sezione-contatti-header {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  animation: fadeInDown 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.badge-sopra-titolo {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--verde-principale, #2E6B49);
+  background: rgba(46, 107, 73, 0.08);
+  border: 1px solid var(--oro-chiaro, #F0D9AE);
+  padding: 6px 16px;
+  border-radius: 26px;
+  margin-bottom: 12px;
+}
+
+.titolo-principale-contatti {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(32px, 4vw, 46px);
+  color: var(--verde-scuro, #1F4C34);
+  margin: 0 0 10px 0;
+}
+
+.sottotitolo-principale-contatti {
+  font-size: 16px;
+  color: var(--testo-scuro, #4A342C);
+  opacity: 0.85;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ---------- GRIGLIA ---------- */
+.griglia-spettacolare-contatti {
+  max-width: 960px;
+  margin: 0 auto 100px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* ---------- STRUTTURA CARD & APPARIZIONE LENTA ---------- */
+.card-item {
+  position: relative;
+  border-radius: 26px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 30px rgba(31, 76, 52, 0.05);
+  opacity: 0;
+  transform: translateY(40px);
+  animation: comparsaLenta 2.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.4s ease;
+  z-index: 1;
+}
+
+/* Ritardi a cascata per l'entrata lenta */
+.card-item:nth-child(1) { animation-delay: 0.3s; grid-column: span 2; } 
+.card-item:nth-child(2) { animation-delay: 0.6s; }  
+.card-item:nth-child(3) { animation-delay: 0.9s; } 
+.card-item:nth-child(4) { animation-delay: 1.2s; }  
+.card-item:nth-child(5) { animation-delay: 1.5s; } 
+.card-item:nth-child(6) { animation-delay: 1.8s; grid-column: span 2; } 
+
+/* Effetto Hover forte e visibile: la card si solleva e si illumina del colore del brand */
+.card-item:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: var(--colore-azione);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 0 20px var(--glow-colore);
+}
+
+.card-glass-content {
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.box-icona-brand {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-item:hover .box-icona-brand {
+  transform: scale(1.12) rotate(6deg);
+}
+
+.box-icona-brand svg {
+  width: 28px;
+  height: 28px;
+}
+
+.testi-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.brand-header-riga {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.etichetta-top {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.handle-ufficiale {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 14px;
+}
+
+.card-item h2, .card-item h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  margin: 0;
+}
+
+.card-item p {
+  font-size: 13.5px;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.citta-studio {
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* --- TASTO FRECCIA --- */
+.freccia-azione {
+  width: 44px; 
+  height: 44px; 
+  border-radius: 50%; 
+  background: var(--colore-azione); 
+  color: #fff;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.card-item:hover .freccia-azione { 
+  transform: translateX(8px) scale(1.1); 
+}
+
+.freccia-azione svg { 
+  width: 20px; 
+  height: 20px; 
+}
+
+
+/* ---------- COLORI E GLOW SPECIFICI PER OGNI CARD ---------- */
+
+.card-miodottore-custom { 
+  --colore-azione: #0077b6; 
+  --glow-colore: rgba(0, 119, 182, 0.25);
+}
+.card-miodottore-custom .card-glass-content { background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(235,248,255,0.95) 100%); }
+.card-miodottore-custom .box-icona-brand { background: #d0f0fd; color: #0077b6; }
+.card-miodottore-custom .etichetta-top { color: #0077b6; }
+.card-miodottore-custom .handle-ufficiale { color: #0077b6; background: rgba(0, 119, 182, 0.1); border: 1px solid rgba(0, 119, 182, 0.2); }
+.card-miodottore-custom h3 { font-size: 22px; color: #003459; }
+.card-miodottore-custom p { color: #415a77; }
+
+.card-tel-custom { 
+  --colore-azione: #2e6b49; 
+  --glow-colore: rgba(46, 107, 73, 0.25);
+}
+.card-tel-custom .card-glass-content { background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(240,248,244,0.95) 100%); }
+.card-tel-custom .box-icona-brand { background: #e2f0ea; color: #2e6b49; }
+.card-tel-custom .etichetta-top { color: #2e6b49; }
+.card-tel-custom .handle-ufficiale { color: #2e6b49; background: rgba(46, 107, 73, 0.1); border: 1px solid rgba(46, 107, 73, 0.2); }
+.card-tel-custom h3 { color: #1f4c34; }
+.card-tel-custom p { color: #4a342c; opacity: 0.8; }
+
+.card-email-custom { 
+  --colore-azione: #3f51b5; 
+  --glow-colore: rgba(63, 81, 181, 0.25);
+}
+.card-email-custom .card-glass-content { background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(243,245,253,0.95) 100%); }
+.card-email-custom .box-icona-brand { background: #e8ecfc; color: #3f51b5; }
+.card-email-custom .etichetta-top { color: #3f51b5; }
+.card-email-custom .handle-ufficiale { color: #3f51b5; background: rgba(63, 81, 181, 0.1); border: 1px solid rgba(63, 81, 181, 0.2); }
+.card-email-custom h3 { color: #1a237e; }
+.card-email-custom p { color: #3f3d56; opacity: 0.8; }
+
+.card-instagram-custom { 
+  --colore-azione: #c2185b; 
+  --glow-colore: rgba(194, 24, 91, 0.25);
+}
+.card-instagram-custom .card-glass-content { background: linear-gradient(135deg, rgba(255,242,246,0.98) 0%, rgba(253,232,240,0.95) 100%); }
+.card-instagram-custom .box-icona-brand { 
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); 
+  color: #ffffff; 
+}
+.card-instagram-custom .etichetta-top { color: #c2185b; }
+.card-instagram-custom .handle-ufficiale { color: #c2185b; background: rgba(225, 48, 108, 0.1); border: 1px solid rgba(225, 48, 108, 0.2); }
+.card-instagram-custom h3 { color: #880e4f; }
+.card-instagram-custom p { color: #5c3a42; }
+
+.card-tiktok-custom { 
+  --colore-azione: #00bcd4; 
+  --glow-colore: rgba(0, 188, 212, 0.3);
+}
+.card-tiktok-custom .card-glass-content { background: linear-gradient(135deg, rgba(18,18,24,0.98) 0%, rgba(28,28,38,0.95) 100%); }
+.card-tiktok-custom .box-icona-brand { 
+  background: #111; 
+  color: #00f2fe; 
+  border: 1px solid rgba(0, 242, 254, 0.3); 
+}
+.card-tiktok-custom .etichetta-top { color: #00f2fe; }
+.card-tiktok-custom .handle-ufficiale { color: #00f2fe; background: rgba(0, 242, 254, 0.12); border: 1px solid rgba(0, 242, 254, 0.25); }
+.card-tiktok-custom h3 { color: #ffffff; }
+.card-tiktok-custom p { color: #b0b0c0; }
+
+.card-studio-custom { 
+  --colore-azione: #bc6c25; 
+  --glow-colore: rgba(188, 108, 37, 0.25);
+}
+.card-studio-custom .card-glass-content { background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(253,251,247,0.95) 100%); }
+.card-studio-custom .box-icona-brand { background: #faedcd; color: #bc6c25; }
+.card-studio-custom .etichetta-top { color: #bc6c25; }
+.card-studio-custom .handle-ufficiale { color: #bc6c25; background: rgba(188, 108, 37, 0.1); border: 1px solid rgba(188, 108, 37, 0.2); }
+.card-studio-custom h3 { color: #603808; }
+.card-studio-custom p { color: #6f4e37; opacity: 0.85; }
+
+
+/* ---------- ANIMAZIONI KEYFRAMES ---------- */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes comparsaLenta {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .sezione-contatti-header { margin-top: 20px; margin-bottom: 30px; }
+  .griglia-spettacolare-contatti {
+    grid-template-columns: 1fr;
+  }
+  .card-item, 
+  .card-item:nth-child(1), 
+  .card-item:nth-child(6) {
+    grid-column: span 1;
+  }
+  .card-glass-content {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+  }
+  .brand-header-riga {
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+  }
+  .freccia-azione {
+    display: none;
+  }
+}

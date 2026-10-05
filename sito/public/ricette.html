@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ricette Sane & Bilanciate - Dott.ssa Genny Ferrara</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="ricette.css">
+</head>
+
+<body><!-- Nastro / Etichetta Dietologa in alto a destra -->
+<div class="nastro-dietologa-container" id="nastroDietologaContainer">
+    <!-- Etichetta Chiusa a Filo di Schermo -->
+    <div class="nastro-etichetta" id="apriNastroBtn">
+        <span class="nastro-icona">🥗</span>
+        <span class="nastro-testo-anteprima">Consiglio della Dietologa</span>
+    </div>
+    
+    <!-- Pannello Espanso -->
+    <div class="nastro-pannello-aperto">
+        <div class="nastro-header-interno">
+            <span class="nastro-titolo-label">✦ Il consiglio del giorno ✦</span>
+            <div class="nastro-azioni-modifica">
+                <!-- Visibile solo se è editor/dietologa -->
+                <button type="button" class="btn-modifica-consiglio" id="btnModificaConsiglio" title="Modifica consiglio" hidden>✏️</button>
+                <button type="button" class="chiudi-nastro-btn" id="chiudiNastroBtn">&times;</button>
+            </div>
+        </div>
+        
+        <!-- Testo del consiglio -->
+        <p id="consiglioDietologaTesto" class="nastro-frase-contenuto">"Caricamento..."</p>
+        
+        <!-- Input nascosto per la modifica -->
+        <div id="boxEditConsiglio" hidden>
+            <textarea id="inputModificaConsiglio" class="nastro-input-modifica" rows="3"></textarea>
+            <button type="button" id="btnSalvaConsiglio" class="btn-pubblica-ricetta" style="padding: 8px; font-size: 13px;">Salva Modifica</button>
+        </div>
+    </div>
+</div>
+  <div class="sfondo-pagina">
+    <div class="bolla b1"></div>
+    <div class="bolla b2"></div>
+    <div class="bolla b3"></div>
+  </div>
+<nav class="dashboard" id="dashboard">
+  <div class="dashboard-fondo">
+    <div class="foglia f1"><svg viewBox="0 0 24 24" fill="none"><path fill="#E8D1A7" d="M12.5 2C12.5 2 19 7.5 19 13.5C19 17.5 15.8 21 12 21C8.2 21 5 17.5 5 13.5C5 7.5 11.5 2 12.5 2Z"/><path d="M12 4v16M12 9c2-1 4-1.5 5-2M12 13c-2-1-4-1.5-5-2M12 16c2-0.8 3.5-1.2 4-2" stroke="#23543B" stroke-width="0.9" stroke-linecap="round"/></svg></div>
+    <div class="foglia f2"><svg viewBox="0 0 24 24" fill="none"><path fill="#E8D1A7" d="M12.5 2C12.5 2 19 7.5 19 13.5C19 17.5 15.8 21 12 21C8.2 21 5 17.5 5 13.5C5 7.5 11.5 2 12.5 2Z"/><path d="M12 4v16M12 9c2-1 4-1.5 5-2M12 13c-2-1-4-1.5-5-2M12 16c2-0.8 3.5-1.2 4-2" stroke="#23543B" stroke-width="0.9" stroke-linecap="round"/></svg></div>
+    <div class="foglia f3"><svg viewBox="0 0 24 24" fill="none"><path fill="#E8D1A7" d="M12.5 2C12.5 2 19 7.5 19 13.5C19 17.5 15.8 21 12 21C8.2 21 5 17.5 5 13.5C5 7.5 11.5 2 12.5 2Z"/><path d="M12 4v16M12 9c2-1 4-1.5 5-2M12 13c-2-1-4-1.5-5-2M12 16c2-0.8 3.5-1.2 4-2" stroke="#23543B" stroke-width="0.9" stroke-linecap="round"/></svg></div>
+    <div class="foglia f4"><svg viewBox="0 0 24 24" fill="none"><path fill="#E8D1A7" d="M12.5 2C12.5 2 19 7.5 19 13.5C19 17.5 15.8 21 12 21C8.2 21 5 17.5 5 13.5C5 7.5 11.5 2 12.5 2Z"/><path d="M12 4v16M12 9c2-1 4-1.5 5-2M12 13c-2-1-4-1.5-5-2M12 16c2-0.8 3.5-1.2 4-2" stroke="#23543B" stroke-width="0.9" stroke-linecap="round"/></svg></div>
+    <div class="foglia f5"><svg viewBox="0 0 24 24" fill="none"><path fill="#E8D1A7" d="M12.5 2C12.5 2 19 7.5 19 13.5C19 17.5 15.8 21 12 21C8.2 21 5 17.5 5 13.5C5 7.5 11.5 2 12.5 2Z"/><path d="M12 4v16M12 9c2-1 4-1.5 5-2M12 13c-2-1-4-1.5-5-2M12 16c2-0.8 3.5-1.2 4-2" stroke="#23543B" stroke-width="0.9" stroke-linecap="round"/></svg></div>
+    <div class="foglia f6"><svg viewBox="0 0 24 24" fill="none"><path fill="#E8D1A7" d="M12.5 2C12.5 2 19 7.5 19 13.5C19 17.5 15.8 21 12 21C8.2 21 5 17.5 5 13.5C5 7.5 11.5 2 12.5 2Z"/><path d="M12 4v16M12 9c2-1 4-1.5 5-2M12 13c-2-1-4-1.5-5-2M12 16c2-0.8 3.5-1.2 4-2" stroke="#23543B" stroke-width="0.9" stroke-linecap="round"/></svg></div>
+    <div class="foglia f7"><svg viewBox="0 0 24 24" fill="none"><path fill="#E8D1A7" d="M12.5 2C12.5 2 19 7.5 19 13.5C19 17.5 15.8 21 12 21C8.2 21 5 17.5 5 13.5C5 7.5 11.5 2 12.5 2Z"/><path d="M12 4v16M12 9c2-1 4-1.5 5-2M12 13c-2-1-4-1.5-5-2M12 16c2-0.8 3.5-1.2 4-2" stroke="#23543B" stroke-width="0.9" stroke-linecap="round"/></svg></div>
+    <div class="foglia f8"><svg viewBox="0 0 24 24" fill="none"><path fill="#E8D1A7" d="M12.5 2C12.5 2 19 7.5 19 13.5C19 17.5 15.8 21 12 21C8.2 21 5 17.5 5 13.5C5 7.5 11.5 2 12.5 2Z"/><path d="M12 4v16M12 9c2-1 4-1.5 5-2M12 13c-2-1-4-1.5-5-2M12 16c2-0.8 3.5-1.2 4-2" stroke="#23543B" stroke-width="0.9" stroke-linecap="round"/></svg></div>
+  </div>
+
+  <ul class="nav-lista">
+    <li class="nav-voce sinistro-1">
+      <a href="presentazione.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width: 18px; height: 18px; margin-bottom: 2px;"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>
+        <span>Chi sono</span>
+      </a>
+    </li>
+    <li class="nav-voce sinistro-2 attivo">
+      <a href="ricette.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 2v7a3 3 0 0 0 3 3V2"/><path d="M6 6h3"/><path d="M7.5 12v10"/><path d="M16 2c-1.5 2.2-2.5 4.8-2.5 7.5 0 2 1 3.5 2.5 3.5V22"/><path d="M16 2v11"/></svg>
+        <span>Ricette</span>
+      </a>
+    </li>
+    <li class="nav-voce nav-home">
+      <a href="home.html" aria-label="Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>
+      </a>
+    </li>
+    <li class="nav-voce destro-1">
+      <a href="messaggi.html" style="font-size: 11px; line-height: 1.15; text-align: center;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="width: 18px; height: 18px; margin-bottom: 2px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Messaggi<br>fammi le tue domande</span>
+      </a>
+    </li>
+    <li class="nav-voce destro-2">
+      <a href="contatti.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2C9 22 2 15 2 7a2 2 0 0 1 2-2Z"/></svg>
+        <span>Contatti</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+  <button class="tasto-scorri" id="tastoScorri" type="button" aria-label="Mostra o nascondi il menu">
+    <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+
+  <main class="contenuto-principale" id="ricette">
+    
+    <section class="ricette-hero">
+      <div class="container-hero">
+        <div class="hero-box-spettacolare">
+          <div class="luce-sfondo-hero"></div>
+          <h1 id="titoloTestoAnimato" class="titolo-rivelato">BILANCIA E COLORA</h1>
+          <div class="linea-decorativa-sotto"></div>
+        </div>
+        <p class="sottotitolo-ricette">Ricette sane, bilanciate e colorate pensate per il tuo benessere quotidiano.</p>
+      </div>
+    </section>
+
+    <!-- BARRA UNIFICATA FILTRI E RICERCA -->
+    <section class="sezione-filtri-unificata">
+      <div class="barra-filtri-ricerca">
+        <div id="containerFiltriCategoria" class="gruppo-bottoni-categoria">
+          <button type="button" class="btn-filtro attivo" data-categoria="tutte">Tutte</button>
+          <button type="button" class="btn-filtro" data-categoria="colazione">Colazione</button>
+          <button type="button" class="btn-filtro" data-categoria="pranzo">Pranzo</button>
+          <button type="button" class="btn-filtro" data-categoria="cena">Cena</button>
+          <button type="button" class="btn-filtro" data-categoria="snack">Snack / Dolci</button>
+        </div>
+
+        <div class="input-ricerca-integrato">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="inputCercaRicette" placeholder="Cerca ricetta o ingrediente...">
+        </div>
+      </div>
+    </section>
+
+    <!-- PANNELLO EDITOR PROFESSIONALE -->
+    <section id="sezionePannelloEditor" class="pannello-editor-scomparsa" hidden>
+      <div class="pannello-editor-header">
+        <h2>Aggiungi Nuova Ricetta</h2>
+        <button type="button" id="chiudiPannelloEditor" class="chiudi-pannello-btn">&times;</button>
+      </div>
+      
+      <form id="formNuovaRicetta" class="form-nuova-ricetta">
+        <div class="form-gruppo">
+          <label>Titolo della ricetta</label>
+          <input type="text" name="titolo" placeholder="Es. Bowl di quinoa e avocado" required>
+        </div>
+
+        <div class="form-gruppo">
+          <label>Categorie (Seleziona una o più opzioni)</label>
+          <div class="checkbox-categorie-grid">
+            <label class="checkbox-tag"><input type="checkbox" name="categorie" value="colazione"> Colazione</label>
+            <label class="checkbox-tag"><input type="checkbox" name="categorie" value="pranzo"> Pranzo</label>
+            <label class="checkbox-tag"><input type="checkbox" name="categorie" value="cena"> Cena</label>
+            <label class="checkbox-tag"><input type="checkbox" name="categorie" value="snack"> Snack</label>
+          </div>
+        </div>
+
+        <div class="form-gruppo-macro">
+          <label>Kcal <input type="number" name="calorie" placeholder="es. 350"></label>
+          <label>Proteine <input type="number" step="0.1" name="proteine" placeholder="es. 25g"></label>
+          <label>Carboidrati <input type="number" step="0.1" name="carboidrati" placeholder="es. 40g"></label>
+          <label>Grassi <input type="number" step="0.1" name="grassi" placeholder="es. 12g"></label>
+        </div>
+
+        <div class="form-gruppo">
+          <label>Carica foto dal dispositivo</label>
+          <input type="file" name="foto" accept="image/*" class="input-file-esteso">
+        </div>
+
+        <div class="form-gruppo">
+          <label>Ingredienti</label>
+          <textarea name="ingredienti" rows="3" placeholder="Elenca gli ingredienti..." required></textarea>
+        </div>
+
+        <div class="form-gruppo">
+          <label>Procedimento</label>
+          <textarea name="procedimento" rows="4" placeholder="Descrivi i passaggi..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-pubblica-ricetta">Pubblica Ricetta</button>
+      </form>
+    </section>
+
+    <!-- GRIGLIA RICETTE CON IL TASTO AGGIUNGI IN CIMA -->
+    <section class="sezione-griglia-ricette">
+      <div id="listaRicettePubbliche" class="griglia-ricette-container">
+        <!-- Tasto Aggiungi Ricetta Espandibile (Posizionato in cima alla griglia) -->
+        <div class="container-btn-editor-inline" id="contenitoreBtnEditor" hidden>
+          <button type="button" id="btnApriPannelloEditor" class="btn-piu-espandibile">
+            <span class="icona-piu">+</span>
+            <span class="testo-nuova-ricetta">Nuova Ricetta</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-spettacolare">
+    <div class="footer-contenitore">
+      <div class="footer-frase-box">
+        <span class="virgoletta-aperta">“</span>
+        <p class="footer-citazione">Non esiste la dieta perfetta in assoluto, esiste la dieta perfetta per te.</p>
+        <span class="footer-firma">— Dott.ssa Genny Ferrara</span>
+      </div>
+      <div class="footer-info-bassa">
+        <p>© 2026 Dott.ssa Genny Ferrara — Biologa Nutrizionista. Tutti i diritti riservati.</p>
+        <p class="credit-developer">Sito realizzato da <strong>Luca Mannara</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="widget-login" id="widgetLogin">
+    <div class="login-icona" id="loginIconaContainer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/>
+      </svg>
+      <span class="badge-iniziali" id="badgeIniziali" hidden></span>
+    </div>
+    <div class="login-contenuto" id="loginContenutoNonLoggato">
+      <p class="login-testo">Accedi o registrati</p>
+      <div class="login-scelta"><button class="login-si" id="loginSi" type="button">Accedi</button></div>
+    </div>
+    <div class="login-contenuto-loggato" id="loginContenutoLoggato" hidden>
+      <div class="profilo-header">
+        <div class="profilo-avatar" id="profiloAvatar">U</div>
+        <div>
+          <h4 class="profilo-nome" id="profiloNome">Nome Cognome</h4>
+          <span class="profilo-ruolo-badge" id="profiloRuolo">Visitatore</span>
+        </div>
+      </div>
+      <div class="profilo-azioni"><button class="btn-logout-professionale" id="btnLogout" type="button">Esci / Logout</button></div>
+    </div>
+  </div>
+
+  <div class="overlay-login" id="overlayLogin">
+    <div class="scheda-login">
+      <button class="chiudi-login" id="chiudiLogin" type="button">&times;</button>
+      <div class="tab-login">
+        <button class="tab-btn attivo" type="button" data-tab="accedi">Accedi</button>
+        <button class="tab-btn" type="button" data-tab="registrati">Registrati</button>
+      </div>
+      <form class="form-login form-pannello is-attivo" id="formAccedi">
+        <label>E-mail <input type="email" name="email" required></label>
+        <label>Password
+          <div class="password-container">
+            <input type="password" name="password" id="passAccedi" required>
+            <button type="button" class="btn-toggle-password" data-target="passAccedi">👁️</button>
+          </div>
+        </label>
+        <button type="submit" class="btn-invia">Accedi</button>
+      </form>
+      <form class="form-login form-pannello" id="formRegistrati">
+        <label>Nome <input type="text" name="nome" required></label>
+        <label>Cognome <input type="text" name="cognome" required></label>
+        <label>E-mail <input type="email" name="email" required></label>
+        <label>Password
+          <div class="password-container">
+            <input type="password" name="password" id="passReg" required>
+            <button type="button" class="btn-toggle-password" data-target="passReg">👁️</button>
+          </div>
+        </label>
+        <label>Conferma password
+          <div class="password-container">
+            <input type="password" name="conferma" id="passConf" required>
+            <button type="button" class="btn-toggle-password" data-target="passConf">👁️</button>
+          </div>
+        </label>
+        <button type="submit" class="btn-invia">Registrati</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="home.js"></script>
+  <script src="ricette.js"></script>
+</body>
+</html>
