@@ -52,7 +52,7 @@ function creaMotoreTurso() {
           const risultato = await client.execute({ sql, args: parametri });
           return {
             changes: Number(risultato.rowsAffected || 0),
-            lastInsertRowid: risultato.lastInsertRowid
+            lastInsertRowid: risultato.lastInsertRowid == null ? null : Number(risultato.lastInsertRowid)
           };
         }
       };
